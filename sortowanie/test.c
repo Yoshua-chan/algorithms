@@ -17,13 +17,13 @@ void test(int size, byte FLAGS) {
     srand((unsigned) time(&now));
 
     
-    char format[] = "|%15s|%9d |%13.6f s |\n";
+    char format[] = "|%7d |%15s|%9d |%13.6f s |\n";
      
     for(int i = 0; i < size; i++)
         tab[i] = rand() % range;
 
-    printf("|%s|%s|%s|\n", "   ALGORITHM   ", " ELEMENTS ", "      TIME      ");
-    printf("|---------------|----------|----------------|\n");
+    printf("|%s|%s|%s|%s|\n", " SORTED " ,"   ALGORITHM   ", " ELEMENTS ", "      TIME      ");
+    printf("|--------|---------------|----------|----------------|\n");
 
     // Quicksort
     if(FLAGS & QUICK){
@@ -34,7 +34,7 @@ void test(int size, byte FLAGS) {
         ticks_after = clock();
 
         seconds = (double)(ticks_after - ticks_before)/CLOCKS_PER_SEC;
-        printf(format, "Quick sort", size, seconds);
+        printf(format, validate(copy, size), "Quick sort", size, seconds);
     }
 
     // Quicksort - Kernighan
@@ -46,7 +46,7 @@ void test(int size, byte FLAGS) {
         ticks_after = clock();
 
         seconds = (double)(ticks_after - ticks_before)/CLOCKS_PER_SEC;
-        printf(format, "Quick sort K&R", size, seconds);
+        printf(format, validate(copy, size),"Quick sort K&R", size, seconds);
     }
 
     // Merge sort
@@ -58,7 +58,7 @@ void test(int size, byte FLAGS) {
         ticks_after = clock();
 
         seconds = (double)(ticks_after - ticks_before)/CLOCKS_PER_SEC;
-        printf(format, "Merge sort", size, seconds);
+        printf(format, validate(copy, size), "Merge sort", size, seconds);
     }
 
     // Bubblesort
@@ -70,7 +70,7 @@ void test(int size, byte FLAGS) {
         ticks_after = clock();
 
         seconds = (double)(ticks_after - ticks_before)/CLOCKS_PER_SEC;
-        printf(format, "Bubble sort", size, seconds);
+        printf(format, validate(copy, size), "Bubble sort", size, seconds);
     }
 
     // Insertion sort
@@ -82,7 +82,7 @@ void test(int size, byte FLAGS) {
         ticks_after = clock();
 
         seconds = (double)(ticks_after - ticks_before)/CLOCKS_PER_SEC;
-        printf(format, "Insertion sort", size, seconds);
+        printf(format, validate(copy, size), "Insertion sort", size, seconds);
     }
 
 
@@ -95,7 +95,7 @@ void test(int size, byte FLAGS) {
         ticks_after = clock();
 
         seconds = (double)(ticks_after - ticks_before)/CLOCKS_PER_SEC;
-        printf(format, "Select sort", size, seconds);
+        printf(format, validate(copy, size), "Select sort", size, seconds);
     }
 
 }
