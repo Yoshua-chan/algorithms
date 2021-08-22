@@ -6,7 +6,7 @@
 
 void test(int size, byte FLAGS) {
 
-    int range = 1000000;
+    int range = 10000000;
     int* tab  = malloc(size * sizeof(int));
     int* copy = malloc(size * sizeof(int));
     double seconds;
@@ -54,7 +54,7 @@ void test(int size, byte FLAGS) {
         intcopy(tab, copy, size);
 
         ticks_before = clock();
-        mergesort(copy, 0 , size);
+        mergesort(copy, 0 , size - 1);
         ticks_after = clock();
 
         seconds = (double)(ticks_after - ticks_before)/CLOCKS_PER_SEC;

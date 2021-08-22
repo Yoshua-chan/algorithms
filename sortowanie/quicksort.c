@@ -2,11 +2,7 @@
 #include "header.h"
 
 void quicksort(int arr[], int left, int right) {
-    return;
-    int pivot; 
-    if(left >= right)
         return;
-    
 }
 
 void quicksort_kernighan(int arr[], int left, int right) {

@@ -21,3 +21,4 @@ void quicksort_kernighan(int arr[], int left, int right);
 int validate(int arr[], int size);
 void intcopy(int from[], int to[], int size);
 void test(int size, byte FLAGS);
+void merge(int arr[], int left, int middle, int right);
