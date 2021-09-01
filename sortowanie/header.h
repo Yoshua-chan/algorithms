@@ -10,7 +10,7 @@
 #define SORTED  0b10000000U
 
 
-#define ALL     0b11111111U
+#define ALL     0b00111111U
 
 typedef unsigned char byte;
 void swap(int arr[], int x, int y);
