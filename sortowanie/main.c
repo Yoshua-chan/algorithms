@@ -32,15 +32,21 @@ byte parse(char* str) {
             case 'a':
                 FLAGS |= ALL;
             break;
+            case 'r':
+                FLAGS |= REVERSE;
+            break;
+            case 'S':
+                FLAGS |= SORTED;
+            break;
         }
     }
     return FLAGS;
 }
 
 int main(int argc, char* argv[]) {
-
+	
     byte FLAGS = 0U;
-    int size_index;
+    int size_index; //Tells the program where in argv the size is stored
 
     if(isdigit(argv[1][0])) {
         size_index = 1;

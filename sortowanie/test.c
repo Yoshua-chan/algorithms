@@ -25,6 +25,29 @@ void test(int size, byte FLAGS) {
     printf("|%s|%s|%s|%s|\n", " SORTED " ,"   ALGORITHM   ", " ELEMENTS ", "      TIME      ");
     printf("|--------|---------------|----------|----------------|\n");
 
+    // Reversed
+    
+    if(FLAGS & (REVERSE | SORTED)) {
+        quicksort_kernighan(tab, 0, size - 1);
+
+        if(FLAGS & REVERSE) {
+            int l = 0;
+            int r = size - 1;
+            int tmpL;
+            int tmpR;
+
+            for(l = 0, r = size - 1; l < r; l++, r--) {
+                tmpL = tab[l];
+                tmpR = tab[r];
+
+                tab[l] = tmpR;
+                tab[r] = tmpL;
+            }
+        }
+        //for(int i = 0; i < size; i++)
+        //    printf("%d ", tab[i]);
+    } 
+
     // Quicksort
     if(FLAGS & QUICK){
         intcopy(tab, copy, size);
@@ -39,7 +62,7 @@ void test(int size, byte FLAGS) {
 
     // Quicksort - Kernighan
     if(FLAGS & QUICK_K){
-        intcopy(tab, copy, size);
+        intcopy(tab, copy, size - 1);
 
         ticks_before = clock();
         quicksort_kernighan(copy, 0 , size);
@@ -59,6 +82,8 @@ void test(int size, byte FLAGS) {
 
         seconds = (double)(ticks_after - ticks_before)/CLOCKS_PER_SEC;
         printf(format, validate(copy, size), "Merge sort", size, seconds);
+        //for(int i = 0; i < size; i++)
+        //    printf("%d ", copy[i]);
     }
 
     // Bubblesort
