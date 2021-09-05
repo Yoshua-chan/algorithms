@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "list.h"
 
+
 ListNode* create_node(int value) {
     ListNode* node;
     node = malloc(sizeof(ListNode));
@@ -9,7 +10,6 @@ ListNode* create_node(int value) {
     node->next = NULL;
     return node; //somehow this fucking works even if i don't return the value
 }
-
 
 ListNode* insert_node(ListNode* node, int value) {
     if(node == NULL)
@@ -28,8 +28,6 @@ ListNode* insert_node(ListNode* node, int value) {
     
     return newNode;
 }
-
-
 
 ListNode* insert_node_new(ListNode* node_to_insert_after, ListNode* new_node) {
     ListNode* next = node_to_insert_after->next;
@@ -55,27 +53,29 @@ ListNode* find_node(ListNode* head, int value) {
     }
     return NULL;
 }
-ListNode* delete_list(ListNode* head) {
+
+void delete_list(ListNode** head_ref) {
+    ListNode* head = *head_ref;
     ListNode* current = head;
     ListNode* next = current->next;
     while(current != NULL) {
-        printf("Freed node at addres %p of value %d\n", current, current->value);
+        //printf("Freed node at addres %p of value %d\n", current, current->value);
         free(current);
         current = next;
         if(current != NULL) //prevents segfault :)
             next = current->next;
     }
-    return NULL;
+    *head_ref = NULL;
 }
 
-void delete_node(ListNode** head_ptr, int index) {
-    ListNode* temp = *head_ptr;
+void delete_node(ListNode** head_ref, int index) {
+    ListNode* temp = *head_ref;
 
     if(temp == NULL) //stop if list is empty
         return;
 
     if(index == 0) { //delete and move head
-        *head_ptr = temp->next; //move head to the second node
+        *head_ref = temp->next; //move head to the second node
         free(temp); //free the old head
         return;
     }
@@ -85,7 +85,7 @@ void delete_node(ListNode** head_ptr, int index) {
 
     ListNode* deleted = temp->next;
     temp->next = deleted->next;
-    printf("freed node indexed %d of value %d, at address %p\n", index, deleted->value, deleted);
+    //printf("freed node indexed %d of value %d, at address %p\n", index, deleted->value, deleted);
     free(deleted);
 }
 
@@ -99,4 +99,63 @@ ListNode* get_node_by_index(ListNode* head, int index) {
         temp = temp->next;
 
     return temp;
+}
+
+ListNode* get_tail(ListNode* head) {
+    if(head != NULL) {
+        ListNode* current = head;
+        while(current != NULL) {
+            if(current->next == NULL)
+                return current;
+            else
+                current = current->next;
+        }
+    }
+}
+
+void push_front(ListNode** head_ref, int value) {
+    if(head_ref != NULL){
+        ListNode* newNode = malloc(sizeof(ListNode));
+        newNode->value = value; //assign 
+        newNode->next = *head_ref; //point new node to old head
+        *head_ref = newNode; //reassign head to the new node
+    }
+}
+
+void push_back(ListNode** tail_ref, int value) {
+
+    if(tail_ref != NULL && *tail_ref != NULL) {
+        ListNode* tail = *tail_ref;
+        tail = *tail_ref;
+        ListNode* newNode = malloc(sizeof(ListNode));
+
+        newNode->value = value;
+        newNode->next = NULL;
+
+        tail->next = newNode;
+        *tail_ref = newNode;
+    }
+}
+
+int get_index(ListNode* head, ListNode* node) {
+    int index = 0;
+    ListNode* current;
+    current = head;
+    while(current != NULL && node != NULL) {
+        if(current == node)
+            return index;
+        index++;
+        current = current->next;
+    }
+    return -1;
+}
+
+int list_size(ListNode* head) {
+    int size = 0;
+    ListNode* current = head;
+    while(current != NULL) {
+        current = current->next;
+        size++;
+    }
+    return size;
 }
