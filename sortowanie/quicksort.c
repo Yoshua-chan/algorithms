@@ -1,8 +1,24 @@
 #include <stdio.h>
 #include "header.h"
 
+#define true (unsigned char)1
 void quicksort(int arr[], int left, int right) {
-        return;
+    if(left >= right) return;
+
+    int L = left, R = right;
+    int pivot = arr[(left + right)/2];
+    
+    do {
+        while(arr[L] < pivot) L++;
+        while(arr[R] > pivot) R--;
+        if(R >= L) {
+            swap(arr, L, R);
+            L++;
+            R--;
+        }
+    } while(L <= R);
+    if(L > left)  quicksort(arr, left, R);
+    if(R < right) quicksort(arr, L, right);
 }
 
 void quicksort_kernighan(int arr[], int left, int right) {
