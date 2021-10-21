@@ -1,6 +1,6 @@
 CC=gcc
 objects=main.o double-list.o linked-list.o
-main.out: $(objects) list.h 
+main.out: $(objects) list.h
 	$(CC) $(objects) -o ./main.out
 
 main.o: main.c list.h
