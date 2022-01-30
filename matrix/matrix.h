@@ -17,9 +17,11 @@ matrix_t matrix_det(Matrix matrix, int* err);
 matrix_t matrix_det_3x3(Matrix matrix, int* err);
 matrix_t matrix_det_2x2(Matrix matrix, int* err);
 
-Matrix create_matrix(int rows, int columns);
+Matrix create_matrix(int rows, int columns, matrix_t* source);
 Matrix matrix_transpose(Matrix matrix);
 Matrix matrix_mul(Matrix A, Matrix B, int* err);
 Matrix matrix_add(Matrix A, Matrix B, int* err);
+Matrix matrix_mul_by_num(Matrix matrix, matrix_t number, int* err);
+void printmatrix(Matrix matrix);
 
 #endif

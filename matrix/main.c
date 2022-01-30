@@ -2,14 +2,16 @@
 #include "matrix.h"
 
 int main() {
-    matrix_t tab[9] = {2, 1, 3, 7, 6, 9, 4, 2, 0};
-    Matrix mat = create_matrix(3, 3);
-    for(int i = 0; i < 9; i++)
-        mat.values[i] = tab[i];
-    int err;
-    printf("%lf\n", matrix_det_3x3(mat, &err));
+    matrix_t srcA[4] = {2, 1, 3, 7};
+    matrix_t srcB[4] = {6, 9, 4, 2};
 
-    if(err) {
-        printf("Błąd w obliczaniu macierzy :c\n");
-    }
+
+    Matrix A = create_matrix(2, 2, srcA);
+    Matrix B = create_matrix(2, 2, srcB);
+    Matrix C = matrix_add(A, B, NULL);
+    
+    matrix_t x = 2137;
+    Matrix one = create_matrix(1, 1, &x);
+    printf("det(one) = %lf\n", matrix_det(one, NULL));
+    printmatrix(C);
 }
