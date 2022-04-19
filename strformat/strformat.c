@@ -20,6 +20,7 @@ char* strformat(char* format, ...) {
 
     va_end(args);
 }
+
 int count_arguments(char* format) {
     int arg_count = 0;
     for(int i = 0; format[i] != '\0'; i++) {
